@@ -33,12 +33,27 @@ services:
         aliases:
           - api-server-name
 
+  ui-container-name:
+    image: ui
+    ports:
+      - "8000:80"
+      - "8001:443"
+    volumes: 
+      - ${USERPROFILE}\.aspnet\https:/https/
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: 8001
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ""
+      ASPNETCORE_ENVIRONMENT: Container 
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/ui.pfx
+    networks:
+      network-name:
+        aliases:
+          - ui-server-name
 
 volumes:
   sql-server-volume-name:
 
 networks:
   network-name: {} 
-
-
 
