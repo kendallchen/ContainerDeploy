@@ -15,12 +15,30 @@ services:
         aliases:
           - sql-server-name
 
+  api-container-name:
+    image: api
+    ports:
+      - "7000:80"
+      - "7001:443"
+    volumes: 
+      - ${USERPROFILE}\.aspnet\https:/https/
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: 7001
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ""
+      ASPNETCORE_ENVIRONMENT: Container 
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/api-server.pfx
+    networks:
+      network-name:
+        aliases:
+          - api-server-name
+
+
 volumes:
   sql-server-volume-name:
 
 networks:
   network-name: {} 
-
 
 
 
