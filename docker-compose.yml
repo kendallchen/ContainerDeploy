@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  sql-server-container-name:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    volumes: 
+      - sql-server-volume-name:/var/opt/mssql
+      - ${USERPROFILE}\.aspnet\https:/https/
+    environment:
+      MSSQL_SA_PASSWORD: ""
+      ACCEPT_EULA: Y
+    networks:
+      network-name:
+        aliases:
+          - sql-server-name
+
+volumes:
+  sql-server-volume-name:
+
+networks:
+  network-name: {} 
+
+
+
+
